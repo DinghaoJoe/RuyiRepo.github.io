@@ -1,5 +1,5 @@
 ---
-import type { ServiceData } from '@/types'
+import type { ServicesI18n } from '@/types'
 import { baseUrl } from '@/lib/baseUrl'
 import PypiTab from './PypiTab.astro'
 import MavenTab from './MavenTab.astro'
@@ -8,10 +8,10 @@ import NpmTab from './NpmTab.astro'
 interface Props {
   title: string
   lang: 'zh' | 'en'
-  serviceData: Record<string, ServiceData>
+  serviceI18n: ServicesI18n
 }
 
-const { title, lang, serviceData } = Astro.props
+const { title, lang, serviceI18n } = Astro.props
 const assetBase = baseUrl()
 
 const tabs = [
@@ -45,7 +45,7 @@ const activeTabId = 'pypi'
         data-panel-id={tab.id}
         hidden={tab.id !== activeTabId}
       >
-        {tab.id === 'pypi' && <PypiTab data={serviceData['pypi']} />}
+        {tab.id === 'pypi' && <PypiTab i18n={serviceI18n.pypi} />}
         {tab.id === 'maven' && <MavenTab lang={lang} />}
         {tab.id === 'npm' && <NpmTab lang={lang} />}
       </div>

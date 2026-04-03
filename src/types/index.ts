@@ -11,23 +11,32 @@ export interface Feedback {
   items: FeedbackItem[]
 }
 
-export interface SiteConfig {
-  lang: 'zh' | 'en'
+export interface PypiI18n {
+  repoAddressLabel: string
+  usageExampleTitle: string
+  supportedTitle: string
+  columns: {
+    package: string
+    version: string
+    abi: string
+  }
+}
+
+export interface ServicesI18n {
+  pypi: PypiI18n
+}
+
+export interface I18nData {
   intro: {
     title: string
     paragraphs: string[]
   }
   servicesTitle: string
   feedback: Feedback
+  services: ServicesI18n
 }
 
-// --- Service data types ---
-
-export interface RepoServiceSection {
-  type: 'repoService'
-  repoAddress: { label: string; url: string }
-  usageExample: { title: string; code: string }
-}
+// --- JSON data types ---
 
 export interface SupportedSoftwareItem {
   name: string
@@ -36,19 +45,8 @@ export interface SupportedSoftwareItem {
   abi: string[]
 }
 
-export interface SupportedSoftwareGridSection {
-  type: 'supportedSoftwareGrid'
-  title: string
-  columns: {
-    package: string
-    version: string
-    abi: string
-  }
+export interface PypiJsonData {
+  repoAddressUrl: string
+  usageExampleCode: string
   items: SupportedSoftwareItem[]
-}
-
-export type ServiceSection = RepoServiceSection | SupportedSoftwareGridSection
-
-export interface ServiceData {
-  sections: ServiceSection[]
 }

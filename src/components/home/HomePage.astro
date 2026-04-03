@@ -3,10 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import IntroSection from '@/components/home/IntroSection.astro'
 import ServiceSection from '@/components/home/ServiceSection/index.astro'
 import FeedbackSection from '@/components/home/FeedbackSection.astro'
-import zh from '@/i18n/zh'
-import en from '@/i18n/en'
-import { pypiZh, pypiEn } from '@/components/home/ServiceSection/data'
-import type { SiteConfig } from '@/types'
+import { zh, en } from '@/i18n'
 
 interface Props {
   lang: 'zh' | 'en'
@@ -15,16 +12,15 @@ interface Props {
 }
 
 const { lang, enableRootLocaleRedirect = false } = Astro.props
-const config: SiteConfig = lang === 'en' ? en : zh
-const serviceData = lang === 'en' ? { pypi: pypiEn } : { pypi: pypiZh }
+const i18n = lang === 'en' ? en : zh
 ---
 
-<Layout lang={config.lang} enableRootLocaleRedirect={enableRootLocaleRedirect}>
-  <IntroSection title={config.intro.title} paragraphs={config.intro.paragraphs} />
+<Layout lang={lang} enableRootLocaleRedirect={enableRootLocaleRedirect}>
+  <IntroSection title={i18n.intro.title} paragraphs={i18n.intro.paragraphs} />
   <ServiceSection
-    title={config.servicesTitle}
-    lang={config.lang}
-    serviceData={serviceData}
+    title={i18n.servicesTitle}
+    lang={lang}
+    serviceI18n={i18n.services}
   />
-  <FeedbackSection feedback={config.feedback} lang={config.lang} />
+  <FeedbackSection feedback={i18n.feedback} lang={lang} />
 </Layout>

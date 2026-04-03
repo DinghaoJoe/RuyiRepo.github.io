@@ -1,71 +1,61 @@
 ---
-import type { ServiceData, RepoServiceSection, SupportedSoftwareGridSection } from '@/types'
+import type { PypiI18n, PypiJsonData } from '@/types'
 import { baseUrl } from '@/lib/baseUrl'
+import pypiJson from '@/data/pypi.json'
 
 interface Props {
-  data: ServiceData
+  i18n: PypiI18n
 }
 
-const { data } = Astro.props
+const { i18n } = Astro.props
 const base = baseUrl()
+const { repoAddressUrl, usageExampleCode, items } = pypiJson as PypiJsonData
 ---
 
-{data.sections.map(section => {
-  if (section.type === 'repoService') {
-    const s = section as RepoServiceSection
-    return (
-      <div class="tab-block">
-        <h3>{s.repoAddress.label}</h3>
-        <div class="code-row">
-          <code>{s.repoAddress.url}</code>
-          <button class="copy-btn" type="button" data-copy-text={s.repoAddress.url} aria-label="复制">
-            <img class="copy-icon" src={`${base}icons/copy.svg`} alt="" width="16" height="16" />
-          </button>
-        </div>
-        <h3>{s.usageExample.title}</h3>
-        <div class="code-row">
-         <code>{s.usageExample.code}</code>
-          <button class="copy-btn" type="button" data-copy-text={s.usageExample.code} aria-label="复制">
-            <img class="copy-icon" src={`${base}icons/copy.svg`} alt="" width="16" height="16" />
-          </button>
-        </div>
-      </div>
-    )
-  }
+<div class="tab-block">
+  <h3>{i18n.repoAddressLabel}</h3>
+  <div class="code-row">
+    <code>{repoAddressUrl}</code>
+    <button class="copy-btn" type="button" data-copy-text={repoAddressUrl} aria-label="复制">
+      <img class="copy-icon" src={`${base}icons/copy.svg`} alt="" width="16" height="16" />
+    </button>
+  </div>
+  <h3>{i18n.usageExampleTitle}</h3>
+  <div class="code-row">
+    <code>{usageExampleCode}</code>
+    <button class="copy-btn" type="button" data-copy-text={usageExampleCode} aria-label="复制">
+      <img class="copy-icon" src={`${base}icons/copy.svg`} alt="" width="16" height="16" />
+    </button>
+  </div>
+</div>
 
-  if (section.type === 'supportedSoftwareGrid') {
-    const s = section as SupportedSoftwareGridSection
-    return (
-      <div class="tab-block">
-        <h3>{s.title}</h3>
-        <div class="software-table-wrap">
-          <table class="software-table">
-            <thead>
-              <tr>
-                <th scope="col">{s.columns.package}</th>
-                <th scope="col">{s.columns.version}</th>
-                <th scope="col">{s.columns.abi}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {s.items.map(item => (
-                <tr>
-                  <td class="cell-name"><code>{item.name}</code></td>
-                  <td class="cell-version"><code>{item.version}</code></td>
-                  <td class="cell-abi">
-                    {item.abi.map(tag => (
-                      <span class="abi-tag">{tag}</span>
-                    ))}
-                  </td>
-                </tr>
+<div class="tab-block">
+  <h3>{i18n.supportedTitle}</h3>
+  <div class="software-table-wrap">
+    <table class="software-table">
+      <thead>
+        <tr>
+          <th scope="col">{i18n.columns.package}</th>
+          <th scope="col">{i18n.columns.version}</th>
+          <th scope="col">{i18n.columns.abi}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map(item => (
+          <tr>
+            <td class="cell-name"><code>{item.name}</code></td>
+            <td class="cell-version"><code>{item.version}</code></td>
+            <td class="cell-abi">
+              {item.abi.map(tag => (
+                <span class="abi-tag">{tag}</span>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
-})}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <style>
   .tab-block {
@@ -95,22 +85,6 @@ const base = baseUrl()
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
     font-size: 13px;
     color: var(--text);
-  }
-
-  .code-block {
-    background: #f3f4f6;
-    color: var(--text);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
-    padding: 16px;
-    border-radius: 10px;
-    overflow-x: auto;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-
-  .code-block pre {
-    margin: 0;
   }
 
   .copy-btn {
