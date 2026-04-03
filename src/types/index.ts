@@ -29,10 +29,22 @@ export interface RepoServiceSection {
   usageExample: { title: string; code: string }
 }
 
+export interface SupportedSoftwareItem {
+  name: string
+  version: string
+  /** Python wheel ABI 标签，如 cp310、cp311 */
+  abi: string[]
+}
+
 export interface SupportedSoftwareGridSection {
   type: 'supportedSoftwareGrid'
   title: string
-  items: { name: string; version?: string }[]
+  columns: {
+    package: string
+    version: string
+    abi: string
+  }
+  items: SupportedSoftwareItem[]
 }
 
 export type ServiceSection = RepoServiceSection | SupportedSoftwareGridSection

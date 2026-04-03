@@ -38,13 +38,29 @@ const base = baseUrl()
     return (
       <div class="tab-block">
         <h3>{s.title}</h3>
-        <div class="software-grid">
-          {s.items.map(item => (
-            <div class="software-card">
-              <div class="name">{item.name}</div>
-              {item.version && <div class="version">{item.version}</div>}
-            </div>
-          ))}
+        <div class="software-table-wrap">
+          <table class="software-table">
+            <thead>
+              <tr>
+                <th scope="col">{s.columns.package}</th>
+                <th scope="col">{s.columns.version}</th>
+                <th scope="col">{s.columns.abi}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {s.items.map(item => (
+                <tr>
+                  <td class="cell-name"><code>{item.name}</code></td>
+                  <td class="cell-version"><code>{item.version}</code></td>
+                  <td class="cell-abi">
+                    {item.abi.map(tag => (
+                      <span class="abi-tag">{tag}</span>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     )
@@ -113,34 +129,65 @@ const base = baseUrl()
     background: #f9fafb;
   }
 
-  .software-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
+  .software-table-wrap {
     margin-top: 12px;
-  }
-
-  .software-card {
-    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 12px;
+    overflow: hidden;
+    background: var(--card);
   }
 
-  .software-card .name {
+  .software-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .software-table th,
+  .software-table td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .software-table thead th {
+    background: #f3f4f6;
     font-weight: 700;
     color: var(--text);
+    border-bottom: 1px solid var(--border);
   }
 
-  .software-card .version {
-    margin-top: 6px;
-    color: var(--muted);
+  .software-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .software-table .cell-name code,
+  .software-table .cell-version code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
     font-size: 13px;
+    color: var(--text);
+    background: transparent;
+    padding: 0;
   }
 
-  @media (max-width: 900px) {
-    .software-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .software-table .cell-version {
+    white-space: nowrap;
+    width: 1%;
+  }
+
+  .cell-abi {
+    line-height: 1.6;
+  }
+
+  .abi-tag {
+    display: inline-block;
+    margin: 2px 6px 2px 0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #eef2ff;
+    color: #3730a3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 12px;
   }
 </style>
