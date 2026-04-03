@@ -10,14 +10,16 @@ import type { SiteConfig } from '@/types'
 
 interface Props {
   lang: 'zh' | 'en'
+  /** 仅用于 `/` 中文首页：根据浏览器语言尝试跳转英文站 */
+  enableRootLocaleRedirect?: boolean
 }
 
-const { lang } = Astro.props
+const { lang, enableRootLocaleRedirect = false } = Astro.props
 const config: SiteConfig = lang === 'en' ? en : zh
 const serviceData = lang === 'en' ? { pypi: pypiEn } : { pypi: pypiZh }
 ---
 
-<Layout lang={config.lang}>
+<Layout lang={config.lang} enableRootLocaleRedirect={enableRootLocaleRedirect}>
   <IntroSection title={config.intro.title} paragraphs={config.intro.paragraphs} />
   <ServiceSection
     title={config.servicesTitle}

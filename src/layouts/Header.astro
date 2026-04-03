@@ -13,8 +13,18 @@ const base = baseUrl()
   <div class="main-header-inner">
     <div class="brand">RuyiRepo</div>
     <nav class="lang-switch">
-      <a href={base} class:list={['lang-btn', { active: lang === 'zh' }]} aria-current={lang === 'zh' ? 'page' : undefined}>中文</a>
-      <a href={`${base}en/`} class:list={['lang-btn', { active: lang === 'en' }]} aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+      <a
+        href={base}
+        class:list={['lang-btn', { active: lang === 'zh' }]}
+        aria-current={lang === 'zh' ? 'page' : undefined}
+        onclick="try{localStorage.setItem('ruyi-repo-lang','zh')}catch(e){}"
+      >中文</a>
+      <a
+        href={`${base}en/`}
+        class:list={['lang-btn', { active: lang === 'en' }]}
+        aria-current={lang === 'en' ? 'page' : undefined}
+        onclick="try{localStorage.setItem('ruyi-repo-lang','en')}catch(e){}"
+      >EN</a>
     </nav>
   </div>
 </header>

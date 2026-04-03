@@ -19,8 +19,9 @@
 
 ## 路由与国际化
 
-- 根路径 `/` 为**中文首页**（URL 保持为 `/`）。
-- 英文为 `/en/`（由 `src/pages/[lang]/index.astro` 仅生成 `en`）。
+- 根路径 `/` 为**中文首页**（URL 保持为 `/`）；首次打开时会读浏览器 **`navigator.languages` / `navigator.language`**，若首选为英语（`en*`）则跳到 **`/en/`**（纯静态站无法用服务端协商语言）。
+- 在页头点 **中文 / EN** 会写入 **`localStorage['ruyi-repo-lang']`**（`zh` / `en`），避免「系统英语但想中文」时被自动跳走。
+- 英文页为 `/en/`（`src/pages/[lang]/index.astro` 仅生成 `en`）。
 
 文案与部分展示逻辑可在 `src/i18n/zh.ts`、`src/i18n/en.ts` 中维护。
 
