@@ -11,7 +11,7 @@ const base = import.meta.env.BASE_URL
   <div class="main-header-inner">
     <div class="brand">RuyiRepo</div>
     <nav class="lang-switch">
-      <a href={`${base}zh/`} class:list={['lang-btn', { active: lang === 'zh' }]} aria-current={lang === 'zh' ? 'page' : undefined}>中文</a>
+      <a href={base} class:list={['lang-btn', { active: lang === 'zh' }]} aria-current={lang === 'zh' ? 'page' : undefined}>中文</a>
       <a href={`${base}en/`} class:list={['lang-btn', { active: lang === 'en' }]} aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
     </nav>
   </div>

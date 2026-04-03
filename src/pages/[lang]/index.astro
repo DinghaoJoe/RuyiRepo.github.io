@@ -1,33 +1,11 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import IntroSection from './_home/components/IntroSection.astro'
-import ServiceSection from './_home/components/ServiceSection/index.astro'
-import FeedbackSection from './_home/components/FeedbackSection.astro'
-import zh from '@/i18n/zh'
-import en from '@/i18n/en'
-import { pypiZh, pypiEn } from './_home/components/ServiceSection/data'
-import type { SiteConfig } from '@/types'
+import HomePage from '@/components/home/HomePage.astro'
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'zh' } },
-    { params: { lang: 'en' } },
-  ]
+  return [{ params: { lang: 'en' as const } }]
 }
 
 const { lang } = Astro.params
-const config: SiteConfig = lang === 'en' ? en : zh
-const serviceData = lang === 'en'
-  ? { pypi: pypiEn }
-  : { pypi: pypiZh }
 ---
 
-<Layout lang={config.lang}>
-  <IntroSection title={config.intro.title} paragraphs={config.intro.paragraphs} />
-  <ServiceSection
-    title={config.servicesTitle}
-    lang={config.lang}
-    serviceData={serviceData}
-  />
-  <FeedbackSection feedback={config.feedback} lang={config.lang} />
-</Layout>
+<HomePage lang={lang} />

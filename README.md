@@ -19,8 +19,8 @@
 
 ## 路由与国际化
 
-- 根路径 `/` 会重定向到 `/zh/`。
-- 语言路由：`/zh/`、`/en/`（由 `src/pages/[lang]/` 与 `src/i18n/` 驱动）。
+- 根路径 `/` 为**中文首页**（URL 保持为 `/`）。
+- 英文为 `/en/`（由 `src/pages/[lang]/index.astro` 仅生成 `en`）。
 
 文案与部分展示逻辑可在 `src/i18n/zh.ts`、`src/i18n/en.ts` 中维护。
 
@@ -29,11 +29,11 @@
 ```text
 ├── public/                 # 静态资源（原样复制到 dist 根目录）
 ├── src/
+│   ├── components/
+│   │   └── home/           # 首页区块（Intro / Services / Feedback）
 │   ├── i18n/               # 中英文站点配置与文案
 │   ├── layouts/            # 全站布局与页头
-│   ├── pages/
-│   │   ├── index.astro     # 根路径，重定向至中文首页
-│   │   └── [lang]/         # 按语言区分的页面与首页组件
+│   ├── pages/              # 仅路由：`/`、`/en/` 等
 │   └── types/              # TypeScript 类型
 ├── astro.config.mjs
 └── package.json
@@ -41,7 +41,7 @@
 
 ## 部署到 GitHub Pages
 
-仓库已包含工作流 [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml)：
+仓库已包含工作流 [`.github/workflows/astro.yml`](.github/workflows/astro.yml)：
 
 1. 在 GitHub 打开 **Settings → Pages**。
 2. **Build and deployment** 中 **Source** 选择 **GitHub Actions**。
