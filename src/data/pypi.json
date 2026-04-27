@@ -1,5 +1,5 @@
 {
-  "updated_at": "1777170608",
+  "updated_at": "1777257009",
   "supportedSoftware": {
     "riscv64": [
       {
@@ -444,13 +444,51 @@
           "5.2.0a12",
           "5.2.0a24",
           "6.0.1",
-          "6.0.0"
+          "6.0.0",
+          "5.2.0",
+          "4.7.5"
         ],
         "abi": [
           "cp310",
           "cp311",
           "cp312",
           "cp313",
+          "cp314"
+        ],
+        "platform": "manylinux_2_38_riscv64"
+      },
+      {
+        "name": "multidict",
+        "version": [
+          "5.0.2",
+          "5.1.0",
+          "5.0.0",
+          "4.7.3"
+        ],
+        "abi": [
+          "cp311"
+        ],
+        "platform": "manylinux_2_38_riscv64"
+      },
+      {
+        "name": "multidict",
+        "version": [
+          "4.7.6"
+        ],
+        "abi": [
+          "cp310",
+          "cp311",
+          "cp313"
+        ],
+        "platform": "manylinux_2_38_riscv64"
+      },
+      {
+        "name": "multidict",
+        "version": [
+          "4.7.4"
+        ],
+        "abi": [
+          "cp311",
           "cp314"
         ],
         "platform": "manylinux_2_38_riscv64"
@@ -684,6 +722,29 @@
           "cp312",
           "cp313",
           "cp314"
+        ],
+        "platform": "manylinux_2_38_riscv64"
+      },
+      {
+        "name": "psutil",
+        "version": [
+          "5.5.1"
+        ],
+        "abi": [
+          "cp311",
+          "cp312"
+        ],
+        "platform": "manylinux_2_38_riscv64"
+      },
+      {
+        "name": "psutil",
+        "version": [
+          "5.4.6",
+          "5.4.4",
+          "5.5.0"
+        ],
+        "abi": [
+          "cp311"
         ],
         "platform": "manylinux_2_38_riscv64"
       },
